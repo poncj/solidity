@@ -10,7 +10,6 @@ contract RockPaperScissors {
     // 1 bnb = 10^9 gwei
     // minimum is 1000000 gwei or 10^15 wei
 
-
     mapping(uint8 => string) private label;
     mapping(uint8 => uint8) private target;
 
@@ -29,12 +28,12 @@ contract RockPaperScissors {
     event GamePlayed(address player, bool isWinner, string details);
 
     function playGame(uint8 _optionByPlayer) payable public returns(bool) {
+    
         require(_optionByPlayer <=2, "Choose: 0 - Rock, 1 - Paper, 2 - Scissors");
         require(msg.value >= minBet, "Minimum bet is 0.001 tBNB");
         require(address(this).balance >= msg.value*2, "Too big a bet. The contract will not be able to pay the winnings.");
         
         uint8 _optionByContract = uint8(block.timestamp % 3);
-
         string memory details = '';
         
         if (target[_optionByPlayer] == _optionByContract) {
@@ -49,7 +48,9 @@ contract RockPaperScissors {
             return true;
 
         } else if (_optionByPlayer == _optionByContract) {
-
+        
+            payable(msg.sender).transfer(msg.value);
+            
             details = string.concat("Its a Draw! Both players chose ", label[_optionByPlayer]);
             emit GamePlayed(msg.sender, false, details);
             return false;

@@ -11,11 +11,10 @@ contract RockPaperScissors {
     // minimum is 1000000 gwei or 10^15 wei
 
 
-    mapping(uint => string) private label;
-    mapping(uint => uint8) private target;
+    mapping(uint8 => string) private label;
+    mapping(uint8 => uint8) private target;
 
-    uint256 public minBet = 10e14 wei;
-
+    uint64 public minBet = 10e14 wei;
 
     constructor() payable {
         label[0] = "Rock";
@@ -34,7 +33,7 @@ contract RockPaperScissors {
         require(msg.value >= minBet, "Minimum bet is 0.001 tBNB");
         require(address(this).balance >= msg.value*2, "Too big a bet. The contract will not be able to pay the winnings.");
         
-        uint256 _optionByContract = block.timestamp % 3;
+        uint8 _optionByContract = uint8(block.timestamp % 3);
 
         string memory details = '';
         

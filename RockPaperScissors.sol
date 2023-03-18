@@ -16,7 +16,6 @@ contract RockPaperScissors {
     uint64 public minBet = 10e14 wei;
     
     address private owner;
-    
 
     constructor() payable {
         owner = msg.sender;
@@ -113,7 +112,7 @@ contract RockPaperScissors {
 
         payable(owner).transfer(amount);
 
-        emit WithdrawnEvent(amount, addressBalance - amount);
+        emit WithdrawnEvent(amount, addressBalance - amount); // NOT accurate !!!
     }
 
     function Refill() payable external {

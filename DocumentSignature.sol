@@ -26,7 +26,7 @@ contract DocumentSignature {
         require(isOwner(), "Not owner");
 
         for (uint i = 0; i < addressesToAdd.length; i++) {
-            whitelist.push(addressesToAdd[i]);
+            addToWhitelist(addressesToAdd[i]);
         }
     }
 
@@ -38,8 +38,12 @@ contract DocumentSignature {
         if (!inWhitelist(addressToAdd)) {
             whitelist.push(addressToAdd);
             signatures[addressToAdd] = false;
+        } else {
+            emit AlreadyInWhitelist(addressToAdd, "Address already in whitelist");
         }
     }
+
+    event AlreadyInWhitelist(address _address, string _message);
 
     // Удаления массива адресов из белого списка
     function removeArrayFromWhitelist(address[] memory addressesToRemove) public {
@@ -60,6 +64,10 @@ contract DocumentSignature {
         for (uint i = 0; i < whitelist.length; i++) {
             if (whitelist[i] == addressToRemove) {
                 delete whitelist[i];
+
+                whitelist[whitelist.length - 1] = whitelist[i];
+                whitelist.pop();
+
                 delete signatures[addressToRemove];
                 break;
             }
@@ -78,7 +86,7 @@ contract DocumentSignature {
 
 
     // Подписание документа
-    function signDocument() payable public {
+    function signDocument() public {
         require(inWhitelist(msg.sender), "Address not whitelisted");
         require(!hasSignedDocument(msg.sender), "Address has already signed the document");
         
@@ -101,6 +109,7 @@ contract DocumentSignature {
 
     // Проверка, что все адреса из белого списка подписали документ
     function areAllSignaturesCollected() public view returns (bool) {
+        require(whitelist.length > 0, "Whitelist is empty");
         for (uint i = 0; i < whitelist.length; i++) {
             if (!signatures[whitelist[i]]) {
                 return false;
@@ -110,7 +119,7 @@ contract DocumentSignature {
     }
 
     // Установка хэша документа
-    function setDocumentHash(string memory hash) payable public {
+    function setDocumentHash(string memory hash) public {
         require(!documentSigned, "Document is already signed");
         require(msg.sender == owner, "Not owner");
         require(inWhitelist(msg.sender), "Access violation!");
@@ -118,7 +127,7 @@ contract DocumentSignature {
     }
 
     // Отзыв подписи
-    function cancelSignature() payable  public {
+    function cancelSignature() public {
         require(inWhitelist(msg.sender), "Access violation!");
         delete signatures[msg.sender];
         documentSigned = false;

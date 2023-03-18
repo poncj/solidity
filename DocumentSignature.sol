@@ -78,7 +78,7 @@ contract DocumentSignature {
 
 
     // Подписание документа
-    function signDocument() public {
+    function signDocument() payable public {
         require(inWhitelist(msg.sender), "Address not whitelisted");
         require(!hasSignedDocument(msg.sender), "Address has already signed the document");
         
@@ -110,14 +110,15 @@ contract DocumentSignature {
     }
 
     // Установка хэша документа
-    function setDocumentHash(string memory hash) public {
+    function setDocumentHash(string memory hash) payable public {
+        require(!documentSigned, "Document is already signed");
         require(msg.sender == owner, "Not owner");
         require(inWhitelist(msg.sender), "Access violation!");
         documentHash = hash;
     }
 
     // Отзыв подписи
-    function cancelSignature() public {
+    function cancelSignature() payable  public {
         require(inWhitelist(msg.sender), "Access violation!");
         delete signatures[msg.sender];
         documentSigned = false;

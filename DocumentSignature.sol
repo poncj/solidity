@@ -129,7 +129,12 @@ contract DocumentSignature {
     // Отзыв подписи
     function cancelSignature() public {
         require(inWhitelist(msg.sender), "Access violation!");
-        delete signatures[msg.sender];
         documentSigned = false;
+        
+        delete signatures[msg.sender];
+        
+        for (uint i = 0; i < whitelist.length; i++) {
+            signatures[whitelist[i]] = false
+        }
     }
 }

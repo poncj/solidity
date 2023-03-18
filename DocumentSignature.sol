@@ -134,7 +134,7 @@ contract DocumentSignature {
         delete signatures[msg.sender];
         
         for (uint i = 0; i < whitelist.length; i++) {
-            signatures[whitelist[i]] = false
+            signatures[whitelist[i]] = false;
         }
     }
 }

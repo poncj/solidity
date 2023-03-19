@@ -11,7 +11,7 @@ contract TokenTeam26 is ERC20 {
 
     constructor() ERC20("TokenTeam26", "T26") {
         owner = msg.sender;
-        _mint(owner, 10000 * (10 ** decimals()));
+        _mint(owner, 10000 * mintValue);
     }
 
     function mintTenTokens() external {

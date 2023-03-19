@@ -6,7 +6,7 @@ interface ITeamToken26 {
     function transferFrom(address _from, address _to, uint256 _amount) external;
 }
 
-contract AirdropTeamToken26 {
+contract AirdropTokenTeam26 {
 
     address public owner;
     

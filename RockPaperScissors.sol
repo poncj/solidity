@@ -8,7 +8,7 @@ contract RockPaperScissors {
     // 0.01 BNB = 10000000 gwei
     // 0.001 BNB = 1000000 gwei
 
-    // minimum is 1000000 gwei or 10^15 wei
+    // minimum is 100000 gwei or 10^15 wei
 
     mapping(uint8 => string) private label;
     mapping(uint8 => uint8) private target;

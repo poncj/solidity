@@ -17,7 +17,7 @@ contract AirdropTokenTeam26 {
         token = ITokenTeam26(_tokenAddress);
     }
     
-    // DONT NEED ALLOWENCE
+    // DON'T NEED ALLOWANCE
     function airdropTokensFromAirdropBalance(address[] memory _addressArray, uint256[] memory _amountArray) public {
         for (uint256 i = 0; i<_addressArray.length; i++) {
             token.transfer(_addressArray[i], _amountArray[i]);

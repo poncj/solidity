@@ -23,7 +23,7 @@ contract AirdropTokenTeam26 {
         }
     }
 
-    function airdropTokensFromUserBalance(address[] memory _addressArray, uint256[] memory _amountArray) public {
+    function airdropTokensFromAddressBalance(address[] memory _addressArray, uint256[] memory _amountArray) public {
         for (uint256 i = 0; i<_addressArray.length; i++) {
            token.transferFrom(msg.sender, _addressArray[i], _amountArray[i]);
         }

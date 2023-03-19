@@ -13,7 +13,7 @@ contract RockPaperScissors {
     mapping(uint8 => string) private label;
     mapping(uint8 => uint8) private target;
 
-    uint64 public minBet = 10e14 wei;
+    uint64 public minBet = 10e13 wei;
     
     address private owner;
 

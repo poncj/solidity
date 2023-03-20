@@ -9,7 +9,7 @@ contract VoteApp {
 
     uint internal autoincrementSession = 0;
     uint internal autoincrementVote = 0;
-    uint internal autoincrementSessionVotes = 0;
+    //uint internal autoincrementSessionVotes = 0;
 
     struct Session {
         uint256 _id;
@@ -59,7 +59,7 @@ contract VoteApp {
         table_session_votes.push([_session._id]);
         
         autoincrementSession++;
-        autoincrementSessionVotes++;
+        //autoincrementSessionVotes++;
     }
 
 

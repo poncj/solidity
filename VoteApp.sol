@@ -106,10 +106,7 @@ contract VoteApp {
     function getOptions(uint256 _id_session) public view returns(string[] memory) {
         return table_session[_id_session]._options;
     }
-
-
     
-
     /*
         bool flag = flags[dynamicIndex][lengthTwoIndex];
         

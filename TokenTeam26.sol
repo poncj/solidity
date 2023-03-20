@@ -17,6 +17,6 @@ contract TokenTeam26 is ERC20 {
     
     // FOR TESTING PURPOSES
     function mintTenTokens() external {
-        _mint(msg.sender, mintValue);
+        _mint(msg.sender, 10 * mintValue);
     }
 }

@@ -1,12 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// interface ITokenTeam26 {
-//     function transfer(address _to, uint256 _amount) external;
-//     function transferFrom(address _from, address _to, uint256 _amount) external;
-// }
-
-import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/utils/Strings.sol"; // i am done!
 
 contract VoteApp {
 

@@ -86,6 +86,11 @@ contract VoteApp {
         require(table_session[_id_session]._status == uint8(SessionStatus.Started), "Session is not started");
         require(!alreadyVoted(_id_session), "Already voted");
         
+        if (_id_option > table_session[_id_session]._options.length - 1) {
+            revert("has no such option");
+        }
+
+
         Vote memory _vote;
         _vote._id = autoincrementVote;
         _vote._id_session = _id_session;
@@ -103,9 +108,13 @@ contract VoteApp {
     }
 
 
-    // bool flag = flags[dynamicIndex][lengthTwoIndex];
+    
 
     /*
+        bool flag = flags[dynamicIndex][lengthTwoIndex];
+        
+        Documentation:
+
         For example, if you have a variable uint[][5] memory x,
         you access the seventh uint in the third dynamic array using x[2][6], 
         and to access the third dynamic array, use x[2]. 
@@ -162,7 +171,6 @@ contract VoteApp {
     }
 
     function alreadyVoted (uint256 _id_session) public view returns(bool) {
-        require(table_session_votes[_id_session].length > 0, "There is no votes");
 
         for (uint256 i = 1; i < table_session_votes[_id_session].length; i++) {
             if (table_vote[table_session_votes[_id_session][i]]._votedBy == msg.sender) {
@@ -208,6 +216,5 @@ contract VoteApp {
         
         return _SessionViewArray;
     }
-
    
 }   
